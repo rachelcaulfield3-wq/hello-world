@@ -1,2 +1,151 @@
-<!DOCTYPE html> <html> <head><title>Hello World</title></head> <body><h1>Hello World!</h1></body> </html>
-<!DOCTYPE html> <html> <head><title>Hello World</title></head> <body><h1>Hello World!</h1></body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hello World — Funky</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#6a5acd; /* slate blue */
+      --bg2:#ff6ec7; /* neon pink */
+      --bg3:#00e5ff; /* electric cyan */
+      --ink:#0b1021; /* deep navy */
+      --white:#ffffff;
+    }
+
+    /* Full-bleed animated gradient background */
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(1200px 800px at 10% 20%, var(--bg2), transparent 60%),
+                  radial-gradient(1200px 800px at 90% 80%, var(--bg3), transparent 60%),
+                  linear-gradient(135deg, var(--bg1), #1a1a40);
+      animation: floatBG 12s ease-in-out infinite alternate;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    @keyframes floatBG {
+      0%   { background-position: 0% 0%, 100% 100%, 0 0; }
+      100% { background-position: 10% 5%, 90% 95%, 100% 0; }
+    }
+
+    /* Funky glassy card */
+    .card {
+      position: relative;
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      border-radius: 28px;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.2);
+      text-align: center;
+      overflow: hidden;
+      transform: translateZ(0);
+    }
+    .card::before, .card::after{
+      content:"";
+      position:absolute;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      filter: blur(30px);
+      opacity: .35;
+      z-index:-1;
+    }
+    .card::before{ background: var(--bg2); top:-60px; left:-60px; }
+    .card::after { background: var(--bg3); bottom:-60px; right:-60px; }
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 5rem);
+      line-height: 1.05;
+      margin: 0 0 .6rem 0;
+      letter-spacing: .02em;
+      font-weight: 800;
+      text-shadow: 0 6px 22px rgba(0,0,0,0.35);
+    }
+
+    .sub {
+      margin: 0 0 1.25rem 0;
+      font-weight: 600;
+      opacity: .9;
+      letter-spacing: .03em;
+    }
+
+    /* Waving hand animation */
+    .wave {
+      display: inline-block;
+      transform-origin: 70% 70%;
+      animation: wave 1.6s ease-in-out infinite;
+      will-change: transform;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+    }
+    @keyframes wave {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(18deg); }
+      30%  { transform: rotate(-8deg); }
+      45%  { transform: rotate(14deg); }
+      60%  { transform: rotate(-4deg); }
+      75%  { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Button (purely decorative) */
+    .btn {
+      display: inline-block;
+      margin-top: .75rem;
+      padding: .8rem 1.2rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--bg2), var(--bg3));
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      user-select: none;
+    }
+    .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 38px rgba(0,0,0,0.3); }
+    .btn:active { transform: translateY(0) scale(.98); opacity: .95; }
+
+    /* Floating shapes for extra funk */
+    .orb {
+      position: absolute;
+      width: 22vmin; height: 22vmin;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      opacity: 0.25;
+      animation: bob 10s ease-in-out infinite alternate;
+      filter: blur(6px);
+    }
+    .orb.one   { background: radial-gradient(circle at 30% 30%, #fff, var(--bg2)); top:8%; left:6%;  animation-delay: -2s; }
+    .orb.two   { background: radial-gradient(circle at 60% 60%, #fff, var(--bg3)); bottom:10%; right:8%; animation-delay: -5s; }
+    .orb.three { background: radial-gradient(circle at 50% 50%, #fff, #ffd166); top:50%; left:50%; transform: translate(-50%,-50%); animation-delay: -8s; }
+
+    @keyframes bob {
+      to { transform: translateY(-12px) translateX(8px) scale(1.04); }
+    }
+
+    /* Accessibility: respects reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Decorative background orbs -->
+  <div class="orb one" aria-hidden="true"></div>
+  <div class="orb two" aria-hidden="true"></div>
+  <div class="orb three" aria-hidden="true"></div>
+
+  <main class="card" role="main" aria-labelledby="hello">
+    <h1 id="hello">
+      Hello World <span class="wave" aria-label="waving hand" role="img">👋</span>
+    </h1>
+    <p class="sub">Welcome to your funky starter page.</p>
+    <a class="btn" href="#" onclick="alert('Have a great day! ✨'); return false;">Press for vibes</a>
+  </main>
+</body>
+</html>
